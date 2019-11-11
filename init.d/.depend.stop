@@ -1,0 +1,14 @@
+TARGETS = apache-htcacheclean open-vm-tools lvm2-lvmpolld lxcfs unattended-upgrades lxd uuidd lvm2-lvmetad resolvconf apache2 ufw atd mdadm irqbalance plymouth open-iscsi urandom iscsid sendsigs rsyslog umountnfs.sh hwclock.sh networking umountfs cryptdisks cryptdisks-early umountroot mdadm-waitidle halt reboot
+iscsid: open-iscsi
+sendsigs: open-vm-tools open-iscsi atd plymouth lxcfs unattended-upgrades lxd uuidd iscsid mdadm apache-htcacheclean apache2 irqbalance
+rsyslog: atd mdadm apache-htcacheclean apache2 irqbalance sendsigs
+umountnfs.sh: open-vm-tools atd plymouth lxcfs unattended-upgrades lxd uuidd sendsigs apache-htcacheclean apache2 irqbalance rsyslog
+hwclock.sh: atd uuidd rsyslog
+networking: open-iscsi iscsid umountnfs.sh apache2
+umountfs: open-vm-tools hwclock.sh open-iscsi atd networking lvm2-lvmpolld plymouth lxcfs unattended-upgrades lxd uuidd iscsid umountnfs.sh mdadm resolvconf apache-htcacheclean lvm2-lvmetad urandom apache2 irqbalance
+cryptdisks: umountfs
+cryptdisks-early: cryptdisks umountfs
+umountroot: umountfs cryptdisks cryptdisks-early
+mdadm-waitidle: umountroot
+halt: umountroot mdadm-waitidle
+reboot: umountroot mdadm-waitidle

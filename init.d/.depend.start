@@ -1,0 +1,16 @@
+TARGETS = open-vm-tools rsyslog lvm2-lvmpolld lxcfs unattended-upgrades lxd uuidd lvm2-lvmetad killprocs apport apache2 single atd mdadm irqbalance cron dbus ssh rsync acpid plymouth grub-common ondemand rc.local
+INTERACTIVE = apache2
+apache2: rsyslog
+single: killprocs
+atd: rsyslog
+mdadm: rsyslog
+irqbalance: rsyslog
+cron: rsyslog
+dbus: rsyslog
+ssh: rsyslog
+rsync: rsyslog
+acpid: rsyslog
+plymouth: open-vm-tools atd rsyslog lvm2-lvmpolld lxcfs unattended-upgrades lxd uuidd mdadm lvm2-lvmetad apache2 irqbalance cron dbus apport ssh rsync acpid
+grub-common: open-vm-tools atd rsyslog lvm2-lvmpolld lxcfs unattended-upgrades lxd uuidd mdadm lvm2-lvmetad apache2 irqbalance cron dbus apport ssh rsync acpid
+ondemand: open-vm-tools atd rsyslog lvm2-lvmpolld lxcfs unattended-upgrades lxd uuidd mdadm lvm2-lvmetad apache2 irqbalance cron dbus apport ssh rsync acpid
+rc.local: open-vm-tools atd rsyslog lvm2-lvmpolld lxcfs unattended-upgrades lxd uuidd mdadm lvm2-lvmetad apache2 irqbalance cron dbus apport ssh rsync acpid
